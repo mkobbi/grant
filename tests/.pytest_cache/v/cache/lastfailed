@@ -1,0 +1,8 @@
+{
+  "test_featureExtractor.py::TestCase": true, 
+  "test_featureExtractor.py::TestFeatureExtractor": true, 
+  "test_featureExtractor.py::TestFeatureExtractor::test_build_tokenizer": true, 
+  "test_featureExtractor.py::TestFeatureExtractor::test_fit": true, 
+  "test_featureExtractor.py::TestFeatureExtractor::test_fit_transform": true, 
+  "test_featureExtractor.py::TestFeatureExtractor::test_transform": true
+}
