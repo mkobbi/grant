@@ -16,15 +16,15 @@ Predictions = rw.prediction_types.make_multiclass(
 workflow = rw.workflows.FeatureExtractorClassifier()
 
 score_types = [
-    rw.score_types.Accuracy(name='acc', precision=3)
+    rw.score_types.ROCAUC(name='auc'),
+    rw.score_types.Accuracy(name='acc'),
+    rw.score_types.NegativeLogLikelihood(name='nll'),
 ]
 
+
 def get_cv(X, y):
-    cv = StratifiedShuffleSplit(n_splits=5, test_size=0.5, random_state=42)
-
-
-return cv.split(X, y)
-// return train_test_split(X, y, test_size=0.5, random_state=42)
+    cv = StratifiedShuffleSplit(n_splits=8, test_size=0.2, random_state=57)
+    return cv.split(X, y)
 
 def _read_data(path, f_name):
     data = pd.read_csv(os.path.join(path, 'data', f_name), sep=';')

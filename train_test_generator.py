@@ -14,7 +14,8 @@ y = np.asarray(pd.DataFrame([data["Total vot"] > 0.0]).astype(int))
 data = data.drop(columns=['Total vot'])
 
 # Splitting X and y into train and test subsets
-X_train, X_test, y_train, y_test = train_test_split(data.values, y.T, test_size=0.1, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(data.values, y.T, train_size=0.0009, test_size=0.0001,
+                                                    random_state=42)
 
 # Concatenate headers
 headers = list(data) + ['y']
