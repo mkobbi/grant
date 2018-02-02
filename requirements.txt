@@ -9,3 +9,4 @@ seaborn
 plotly
 missingno
 urllib3
+pathlib

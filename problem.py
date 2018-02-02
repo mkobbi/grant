@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 import os
 
+import sys
+
+# print(sys.path)
+
+add_to_path = './submissions/starting_kit'
+if add_to_path not in sys.path:
+    sys.path.append(add_to_path)
+
 import pandas as pd
 import rampwf as rw
 from sklearn.model_selection import StratifiedShuffleSplit
@@ -16,19 +24,20 @@ Predictions = rw.prediction_types.make_multiclass(
 workflow = rw.workflows.FeatureExtractorClassifier()
 
 score_types = [
-    rw.score_types.ROCAUC(name='auc'),
+    #rw.score_types.ROCAUC(name='auc'),
     rw.score_types.Accuracy(name='acc'),
-    rw.score_types.NegativeLogLikelihood(name='nll'),
+    #rw.score_types.NegativeLogLikelihood(name='nll'),
 ]
 
 
 def get_cv(X, y):
-    cv = StratifiedShuffleSplit(n_splits=8, test_size=0.2, random_state=57)
+    cv = StratifiedShuffleSplit(n_splits=10, test_size=0.2, random_state=57)
     return cv.split(X, y)
 
 def _read_data(path, f_name):
     data = pd.read_csv(os.path.join(path, 'data', f_name), sep=';')
     y_array = data[_target_column_name].values
+    #data = data.drop(data.columns[0], axis=1)
     X_df = data.drop(_target_column_name, axis=1)
     test = os.getenv('RAMP_TEST_MODE', 0)
     if test:
